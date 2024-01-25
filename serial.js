@@ -42,21 +42,25 @@ function enableSlidersAndInputs() {
 
     sliders.forEach((slider, index) => {
         slider.disabled = false;
-        slider.addEventListener('input', () => {
-            inputs[index].value = slider.value;
-            sendSliderValue(getSliderIndex(slider.id), slider.value);
+
+        // Add event listeners for slider events
+        ['input', 'mousedown', 'mouseup', 'click'].forEach(eventType => {
+            slider.addEventListener(eventType, () => {
+                inputs[index].value = slider.value;
+                sendSliderValue(getSliderIndex(slider.id), slider.value);
+            });
         });
     });
 
     inputs.forEach((input, index) => {
         input.disabled = false;
-        input.addEventListener('input', () => {
-            sliders[index].value = input.value;
-            sendSliderValue(getSliderIndex(input.id), input.value);
-        });
-        input.addEventListener('change', () => {
-            sliders[index].value = input.value;
-            sendSliderValue(getSliderIndex(input.id), input.value);
+
+        // Add event listeners for input events
+        ['input', 'change', 'mousedown', 'mouseup', 'click'].forEach(eventType => {
+            input.addEventListener(eventType, () => {
+                sliders[index].value = input.value;
+                sendSliderValue(getSliderIndex(input.id), input.value);
+            });
         });
     });
 }
