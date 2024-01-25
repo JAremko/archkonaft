@@ -75,7 +75,7 @@ function getSliderIndex(sliderId) {
 
 async function sendSliderValue(index, value) {
     if (writer && index !== -1) {
-        const byteArray = [index, parseInt(value), 255, 255];
+        const byteArray = [index, parseInt(value), 255];
         await writer.write(new Uint8Array(byteArray));
         console.log('Slider value sent:', byteArray);
     } else {
