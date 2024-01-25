@@ -54,7 +54,6 @@ function enableSlidersAndInputs() {
             sliders[index].value = input.value;
             sendSliderValue(getSliderIndex(input.id), input.value);
         });
-        // Capture inc/dec interactions
         input.addEventListener('change', () => {
             sliders[index].value = input.value;
             sendSliderValue(getSliderIndex(input.id), input.value);
