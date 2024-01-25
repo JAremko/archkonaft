@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Serial Communication</title>
+    <link rel="stylesheet" href="bulma.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script src="serial.js"></script>
+</head>
+<body>
+    <section class="section">
+        <div class="container" id="appContainer">
+            <button id="connectButton" class="button is-primary">Connect</button>
+
+            <!-- Display Group -->
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">Display</p>
+                </header>
+                <div class="card-content">
+                    <div class="field">
+                        <label class="label">Vcom</label>
+                        <input type="range" id="sliderVcom" min="0" max="255" disabled>
+                        <input type="number" id="inputVcom" min="0" max="255" disabled>
+                    </div>
+                    <div class="field">
+                        <label class="label">Brightness</label>
+                        <input type="range" id="sliderBrightnessDisplay" min="0" max="255" disabled>
+                        <input type="number" id="inputBrightnessDisplay" min="0" max="255" disabled>
+                    </div>
+                    <div class="field">
+                        <label class="label">Contrast</label>
+                        <input type="range" id="sliderContrastDisplay" min="0" max="255" disabled>
+                        <input type="number" id="inputContrastDisplay" min="0" max="255" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADV Group -->
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">ADV</p>
+                </header>
+                <div class="card-content">
+                    <div class="field">
+                        <label class="label">Brightness</label>
+                        <input type="range" id="sliderBrightnessAdv" min="0" max="255" disabled>
+                        <input type="number" id="inputBrightnessAdv" min="0" max="255" disabled>
+                    </div>
+                    <div class="field">
+                        <label class="label">Contrast</label>
+                        <input type="range" id="sliderContrastAdv" min="0" max="255" disabled>
+                        <input type="number" id="inputContrastAdv" min="0" max="255" disabled>
+                    </div>
+                    <div class="field">
+                        <label class="label">Hue</label>
+                        <input type="range" id="sliderHue" min="0" max="255" disabled>
+                        <input type="number" id="inputHue" min="0" max="255" disabled>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async (event) => {
+            initializeApp(); // Initializes the application stages
+        });
+    </script>
+</body>
+</html>
+ыу
