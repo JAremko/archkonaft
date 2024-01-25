@@ -12,15 +12,15 @@ function initializeApp() {
 }
 
 function setupConnectButton() {
-    const appContainer = document.getElementById('appContainer');
-    appContainer.innerHTML = '<button id="connect" class="button is-link">Connect to Serial Device</button>';
+    const connectContainer = document.getElementById('connectContainer');
+    connectContainer.innerHTML = '<button id="connect" class="button is-link">Connect to Serial Device</button>';
     document.getElementById('connect').addEventListener('click', connectSerial);
 }
 
 function displayNotSupportedError() {
-    const appContainer = document.getElementById('appContainer');
-    appContainer.innerHTML = '<div class="notification is-danger">Web Serial API is not supported in this browser. ' +
-                             'Please check <a href="https://caniuse.com/web-serial" target="_blank">browser compatibility</a>.</div>';
+    const connectContainer = document.getElementById('connectContainer');
+    connectContainer.innerHTML = '<div class="notification is-danger">Web Serial API is not supported in this browser. ' +
+                                 'Please check <a href="https://caniuse.com/web-serial" target="_blank">browser compatibility</a>.</div>';
 }
 
 async function connectSerial() {
@@ -44,7 +44,7 @@ function enableSlidersAndInputs() {
         slider.disabled = false;
         slider.addEventListener('input', () => {
             inputs[index].value = slider.value;
-            sendSliderValue(index, slider.value);
+            sendSliderValue(getSliderIndex(slider.id), slider.value);
         });
     });
 
@@ -52,18 +52,29 @@ function enableSlidersAndInputs() {
         input.disabled = false;
         input.addEventListener('input', () => {
             sliders[index].value = input.value;
-            sendSliderValue(index, input.value);
+            sendSliderValue(getSliderIndex(input.id), input.value);
         });
     });
 }
 
+function getSliderIndex(sliderId) {
+    switch (sliderId) {
+        case "sliderVcom": return 0;
+        case "sliderBrightnessDisplay": return 1;
+        case "sliderContrastDisplay": return 2;
+        case "sliderBrightnessAdv": return 3;
+        case "sliderContrastAdv": return 4;
+        case "sliderHue": return 5;
+        default: return -1; // Invalid index
+    }
+}
+
 async function sendSliderValue(index, value) {
-    if (writer) {
+    if (writer && index !== -1) {
         const byteArray = [index, parseInt(value)];
         await writer.write(new Uint8Array(byteArray));
         console.log('Slider value sent:', byteArray);
     } else {
-        console.error('Serial port not connected or writer not set up.');
+        console.error('Serial port not connected, writer not set up, or invalid index.');
     }
 }
-
